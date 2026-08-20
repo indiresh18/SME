@@ -1,5 +1,11 @@
 /* SME Anchor - shared frontend utilities */
-const API_BASE = "/api";
+const BACKEND_URL = "https://sme-tk4o.onrender.com";
+
+const API_BASE = window.SME_API_BASE || (
+  (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") && window.location.port === "5000"
+    ? "/api"
+    : `${BACKEND_URL}/api`
+);
 
 async function apiGet(path) {
   const res = await fetch(`${API_BASE}${path}`);

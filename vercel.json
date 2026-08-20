@@ -1,0 +1,8 @@
+﻿{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://sme-tk4o.onrender.com/api/:path*"
+    }
+  ]
+}
