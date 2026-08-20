@@ -3,6 +3,13 @@ Your Business, Anchored by Intelligence." An intelligent operational anchor for 
 
 SME Anchor is a complete virtual SME management platform with three connected portals — Owner, Customer, and Supplier — all reading and writing to a single shared business database. A rule-based AI ("SME Anchor AI") analyzes live inventory, demand and supplier data to recommend and prepare purchase orders, which the owner must explicitly approve.
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+PROJECT IS LIVE AT -------> FRONTEND -> sme-fawn.vercel.app
+                            BACKEND ->https://sme-tk4o.onrender.com
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Customer purchases → Sale recorded → Inventory decreases → Owner dashboard updates
    → AI analyzes the business → Owner approves purchase → Supplier accepts,
    ships, delivers → Inventory increases
