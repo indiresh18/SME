@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SME Anchor Mart</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<header class="store-header">
+  <div style="display:flex;align-items:center;gap:10px;">
+    <div class="brand-mark">⚓</div>
+    <div>
+      <strong style="font-size:15px;">SME Anchor Mart</strong>
+      <div class="muted" style="font-size:11px;">Powered by SME Anchor</div>
+    </div>
+  </div>
+  <div class="topbar-search" style="max-width:360px;">🔍 <input id="store-search" placeholder="Search products..." /></div>
+  <nav class="store-nav">
+    <a href="#" id="nav-orders">Orders</a>
+    <a href="#" class="cart-btn" id="nav-cart">🛒 Cart<span class="cart-count hidden" id="cart-count">0</span></a>
+    <div class="avatar" style="width:30px;height:30px;font-size:11px;">CU</div>
+    <a href="#" id="logout-link" class="muted" style="font-size:12px;">Log out</a>
+  </nav>
+</header>
+
+<div class="category-rail" id="category-rail"></div>
+<div class="product-grid" id="product-grid"></div>
+<div class="flex-between" style="padding:0 24px 30px 24px;">
+  <button class="btn btn-ghost" id="prev-page">← Previous</button>
+  <span class="muted" id="page-indicator" style="font-size:12px;"></span>
+  <button class="btn btn-ghost" id="next-page">Next →</button>
+</div>
+
+<!-- Cart drawer -->
+<div class="overlay" id="overlay"></div>
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cart-drawer-header">
+    <strong>Your Cart</strong>
+    <button class="icon-btn" id="close-cart">✕</button>
+  </div>
+  <div class="cart-items" id="cart-items"></div>
+  <div class="cart-footer">
+    <div class="cart-total-row"><span>Subtotal</span><span id="cart-subtotal">₹0</span></div>
+    <div class="cart-total-row"><span>Tax (5%)</span><span id="cart-tax">₹0</span></div>
+    <div class="cart-total-row grand"><span>Total</span><span id="cart-total">₹0</span></div>
+    <button class="btn btn-primary btn-block mt-16" id="checkout-btn">Checkout</button>
+  </div>
+</div>
+
+<!-- Invoice modal -->
+<div class="modal-overlay" id="invoice-modal">
+  <div class="modal-box">
+    <div class="section-title">Order Confirmed 🎉</div>
+    <div class="section-sub">Sale recorded successfully. Owner dashboard has been updated.</div>
+    <div class="invoice-box" id="invoice-content"></div>
+    <button class="btn btn-primary btn-block mt-16" id="invoice-close">Continue Shopping</button>
+  </div>
+</div>
+
+<!-- Orders modal -->
+<div class="modal-overlay" id="orders-modal">
+  <div class="modal-box" style="max-width:380px;">
+    <div class="section-title">Order History</div>
+    <p class="section-sub">This is a demo storefront — your invoice appears right after checkout. Past invoices aren't persisted separately from the shared business ledger yet.</p>
+    <button class="btn btn-secondary btn-block" id="orders-close">Close</button>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/customer.js"></script>
+</body>
+</html>

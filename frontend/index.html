@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SME Anchor — Login</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div class="login-screen">
+  <div class="login-card">
+    <div class="login-hero">
+      <div>
+        <div class="anchor-mark">⚓</div>
+        <h1>SME Anchor</h1>
+        <p>"Your Business, Anchored by Intelligence."<br/><br/>
+        An intelligent operational anchor for small and medium enterprises —
+        connecting your customers, your inventory and your suppliers into one
+        AI-guided business.</p>
+      </div>
+      <div style="font-size:12px; opacity:.85;">
+        Customer purchases → Sales recorded → Inventory changes → Owner sees impact →
+        AI analyzes → Owner approves → Supplier delivers → Inventory restored.
+      </div>
+    </div>
+    <div class="login-panel">
+      <h2>Log in to SME Anchor</h2>
+      <p class="sub">Choose how you'd like to enter the platform.</p>
+
+      <button class="role-btn" id="btn-owner">
+        <div class="role-icon">🧭</div>
+        <div>
+          <div class="role-title">Owner</div>
+          <div class="role-desc">Manage inventory, sales, suppliers &amp; the AI Anchor</div>
+        </div>
+      </button>
+
+      <button class="role-btn" id="btn-customer">
+        <div class="role-icon">🛒</div>
+        <div>
+          <div class="role-title">Customer</div>
+          <div class="role-desc">Browse SME Anchor Mart and place orders</div>
+        </div>
+      </button>
+
+      <button class="role-btn" id="btn-supplier">
+        <div class="role-icon">🚚</div>
+        <div>
+          <div class="role-title">Supplier</div>
+          <div class="role-desc">Receive, accept and fulfil purchase orders</div>
+        </div>
+      </button>
+
+      <div class="supplier-select" id="supplier-select-wrap">
+        <label class="muted" style="font-size:12px;">Select supplier profile</label>
+        <select id="supplier-select"></select>
+        <button class="btn btn-primary btn-block mt-8" id="btn-supplier-continue">Continue as Supplier</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script>
+document.getElementById("btn-owner").addEventListener("click", () => {
+  sessionStorage.setItem("sme_role", "owner");
+  window.location.href = "owner.html";
+});
+
+document.getElementById("btn-customer").addEventListener("click", () => {
+  sessionStorage.setItem("sme_role", "customer");
+  window.location.href = "customer.html";
+});
+
+const supplierWrap = document.getElementById("supplier-select-wrap");
+document.getElementById("btn-supplier").addEventListener("click", async () => {
+  supplierWrap.classList.toggle("show");
+  if (supplierWrap.classList.contains("show")) {
+    const suppliers = await apiGet("/suppliers");
+    const select = document.getElementById("supplier-select");
+    select.innerHTML = suppliers.map(s => `<option value="${s.id}">${s.name}</option>`).join("");
+  }
+});
+
+document.getElementById("btn-supplier-continue").addEventListener("click", () => {
+  const id = document.getElementById("supplier-select").value;
+  sessionStorage.setItem("sme_role", "supplier");
+  sessionStorage.setItem("sme_supplier_id", id);
+  window.location.href = "supplier.html";
+});
+</script>
+</body>
+</html>

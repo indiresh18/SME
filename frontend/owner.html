@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SME Anchor — Owner</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">⚓</div>
+      <div class="brand-text"><strong>SME Anchor</strong><span>Owner Portal</span></div>
+    </div>
+    <nav class="nav-group">
+      <a class="nav-item active" data-view="dashboard"><span class="icon">🏠</span><span class="nav-label">Dashboard</span></a>
+      <a class="nav-item" data-view="products"><span class="icon">📦</span><span class="nav-label">Products</span></a>
+      <a class="nav-item" data-view="inventory"><span class="icon">📊</span><span class="nav-label">Inventory</span></a>
+      <a class="nav-item" data-view="sales"><span class="icon">💹</span><span class="nav-label">Sales</span></a>
+      <a class="nav-item" data-view="customers"><span class="icon">👥</span><span class="nav-label">Customers</span></a>
+      <a class="nav-item" data-view="suppliers"><span class="icon">🚚</span><span class="nav-label">Suppliers</span></a>
+      <a class="nav-item" data-view="purchases"><span class="icon">🧾</span><span class="nav-label">Purchase Orders</span></a>
+      <a class="nav-item" data-view="finance"><span class="icon">💰</span><span class="nav-label">Finance</span></a>
+      <a class="nav-item" data-view="reports"><span class="icon">📈</span><span class="nav-label">Reports</span></a>
+      <a class="nav-item" data-view="ai"><span class="icon">⚓</span><span class="nav-label">AI Anchor</span></a>
+      <a class="nav-item" data-view="settings"><span class="icon">⚙️</span><span class="nav-label">Settings</span></a>
+    </nav>
+    <div style="margin-top:auto;">
+      <a class="nav-item" id="logout-btn"><span class="icon">↩</span><span class="nav-label">Log out</span></a>
+    </div>
+  </aside>
+
+  <div class="main-area">
+    <header class="topbar">
+      <div class="topbar-search">🔍 <input id="global-search" placeholder="Search products, orders, suppliers..." /></div>
+      <div class="topbar-right">
+        <button class="icon-btn" title="Notifications">🔔<span class="badge-dot" id="notif-dot" style="display:none;"></span></button>
+        <div class="profile-chip">
+          <div class="avatar">SA</div>
+          <div><div class="name">SME Anchor Store</div><div class="role">Owner</div></div>
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+
+      <!-- DASHBOARD -->
+      <section data-panel="dashboard">
+        <div class="section-title">Business Overview</div>
+        <p class="section-sub">A live snapshot of SME Anchor Store, updated as customers buy and suppliers deliver.</p>
+        <div class="kpi-grid" id="kpi-grid"></div>
+
+        <div class="grid-2">
+          <div class="card chart-wrap">
+            <div class="flex-between">
+              <div>
+                <div class="section-title" style="margin-bottom:0;">Sales Overview</div>
+                <div class="section-sub" id="sales-change" style="margin-bottom:0;">Loading…</div>
+              </div>
+              <div class="pill-tabs" id="range-tabs">
+                <div class="pill-tab" data-range="today">Today</div>
+                <div class="pill-tab active" data-range="7d">7 Days</div>
+                <div class="pill-tab" data-range="30d">30 Days</div>
+              </div>
+            </div>
+            <div class="mt-16"><canvas id="sales-canvas" width="640" height="220" style="width:100%;height:220px;"></canvas></div>
+          </div>
+
+          <div class="card" style="padding:18px;">
+            <div class="section-title">Low Stock Watch</div>
+            <div class="section-sub">Products closest to a stockout right now.</div>
+            <div id="low-stock-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRODUCTS -->
+      <section data-panel="products" class="hidden">
+        <div class="flex-between">
+          <div>
+            <div class="section-title">Products</div>
+            <div class="section-sub">Full catalog across SME Anchor Store.</div>
+          </div>
+          <input id="products-search" placeholder="Search products…" style="padding:9px 14px;border:1px solid var(--gray-border);border-radius:10px;font-size:13px;width:220px;" />
+        </div>
+        <div class="card scroll-x mt-16">
+          <table>
+            <thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Stock</th><th>Rating</th></tr></thead>
+            <tbody id="products-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- INVENTORY -->
+      <section data-panel="inventory" class="hidden">
+        <div class="section-title">Inventory</div>
+        <div class="section-sub">Stock coverage vs. daily demand. Critical items need action soon.</div>
+        <div class="card scroll-x mt-16">
+          <table>
+            <thead><tr><th>Product</th><th>Category</th><th>Stock</th><th>Min. Stock</th><th>Daily Demand</th><th>Coverage</th><th>Status</th><th></th></tr></thead>
+            <tbody id="inventory-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SALES -->
+      <section data-panel="sales" class="hidden">
+        <div class="section-title">Sales</div>
+        <div class="section-sub">Recent transactions recorded from SME Anchor Mart.</div>
+        <div class="card scroll-x mt-16">
+          <table>
+            <thead><tr><th>Invoice</th><th>Customer</th><th>Items</th><th>Total</th><th>Profit</th><th>When</th></tr></thead>
+            <tbody id="sales-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- CUSTOMERS -->
+      <section data-panel="customers" class="hidden">
+        <div class="section-title">Customers</div>
+        <div class="section-sub">Everyone who shops at SME Anchor Mart.</div>
+        <div class="card scroll-x mt-16">
+          <table><thead><tr><th>Name</th><th>Email</th></tr></thead><tbody id="customers-tbody"></tbody></table>
+        </div>
+      </section>
+
+      <!-- SUPPLIERS -->
+      <section data-panel="suppliers" class="hidden">
+        <div class="section-title">Supplier Comparison &amp; Manual Purchase</div>
+        <div class="section-sub">Pick a product to compare all five suppliers, then create a purchase order.</div>
+        <div class="card" style="padding:18px;">
+          <label class="muted" style="font-size:12px;">Product</label>
+          <select id="po-product-select" style="width:100%;max-width:360px;padding:9px 12px;border:1px solid var(--gray-border);border-radius:10px;margin-top:6px;"></select>
+          <div class="supplier-grid mt-16" id="supplier-compare-grid"></div>
+        </div>
+
+        <div class="card mt-16 hidden" id="po-builder" style="padding:18px;">
+          <div class="section-title" style="margin-bottom:12px;">Create Purchase Order</div>
+          <div id="po-builder-body"></div>
+        </div>
+      </section>
+
+      <!-- PURCHASE ORDERS -->
+      <section data-panel="purchases" class="hidden">
+        <div class="section-title">Purchase Orders</div>
+        <div class="section-sub">Track every order from approval through delivery.</div>
+        <div class="card scroll-x mt-16">
+          <table>
+            <thead><tr><th>PO</th><th>Product</th><th>Supplier</th><th>Qty</th><th>Total</th><th>Status</th><th>Updated</th><th></th></tr></thead>
+            <tbody id="po-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- FINANCE -->
+      <section data-panel="finance" class="hidden">
+        <div class="section-title">Finance</div>
+        <div class="section-sub">Cash position and recent expenses.</div>
+        <div class="kpi-grid" id="finance-kpis"></div>
+      </section>
+
+      <!-- REPORTS -->
+      <section data-panel="reports" class="hidden">
+        <div class="section-title">Reports</div>
+        <div class="section-sub">Top-selling products, last 7 days.</div>
+        <div class="card scroll-x mt-16">
+          <table><thead><tr><th>#</th><th>Product</th><th>Units Sold</th></tr></thead><tbody id="reports-tbody"></tbody></table>
+        </div>
+      </section>
+
+      <!-- AI (full view scroll target) -->
+      <section data-panel="ai" class="hidden">
+        <div class="section-title">AI Anchor</div>
+        <div class="section-sub">Your intelligent business co-pilot lives in the dock below — ask away.</div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section data-panel="settings" class="hidden">
+        <div class="section-title">Settings</div>
+        <div class="card mt-16" style="padding:18px;">
+          <div class="section-sub">Demo controls</div>
+          <button class="btn btn-danger" id="reset-demo-btn">Reset Demo Data</button>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- AI DOCK -->
+    <div class="ai-dock" id="ai-dock">
+      <div class="ai-header" id="ai-header-toggle">
+        <div class="ai-header-left">
+          <div class="ai-avatar">⚓</div>
+          <div>
+            <div class="ai-title">SME Anchor AI</div>
+            <div class="ai-subtitle">Your intelligent business co-pilot.</div>
+          </div>
+        </div>
+        <div class="muted" style="font-size:12px;" id="ai-toggle-caret">▾</div>
+      </div>
+      <div class="ai-body">
+        <div class="ai-messages" id="ai-messages"></div>
+        <div class="ai-suggestions" id="ai-suggestions"></div>
+        <div class="ai-input-row">
+          <input id="ai-input" placeholder="Ask SME Anchor about your business…" />
+          <button class="btn btn-primary" id="ai-send">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/owner.js"></script>
+</body>
+</html>

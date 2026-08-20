@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SME Anchor — Supplier</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">⚓</div>
+      <div class="brand-text"><strong>SME Anchor</strong><span id="supplier-name-label">Supplier Portal</span></div>
+    </div>
+    <nav class="nav-group">
+      <a class="nav-item active" data-view="dashboard"><span class="icon">🏠</span><span class="nav-label">Dashboard</span></a>
+      <a class="nav-item" data-view="orders"><span class="icon">🧾</span><span class="nav-label">Orders</span></a>
+      <a class="nav-item" data-view="products"><span class="icon">📦</span><span class="nav-label">Products</span></a>
+      <a class="nav-item" data-view="profile"><span class="icon">🏢</span><span class="nav-label">Business Profile</span></a>
+    </nav>
+    <div style="margin-top:auto;">
+      <a class="nav-item" id="logout-btn"><span class="icon">↩</span><span class="nav-label">Log out</span></a>
+    </div>
+  </aside>
+
+  <div class="main-area">
+    <header class="topbar">
+      <div style="font-weight:700;" id="topbar-supplier-name">Supplier</div>
+      <div class="topbar-right">
+        <div class="profile-chip">
+          <div class="avatar" id="supplier-avatar">S</div>
+          <div><div class="name" id="supplier-chip-name">Supplier</div><div class="role">Supplier</div></div>
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+      <section data-panel="dashboard">
+        <div class="section-title">Supplier Overview</div>
+        <p class="section-sub">Your orders and performance with SME Anchor.</p>
+        <div class="kpi-grid" id="supplier-kpis"></div>
+      </section>
+
+      <section data-panel="orders" class="hidden">
+        <div class="section-title">Purchase Orders</div>
+        <p class="section-sub">Accept new orders, then move them through shipped → delivered.</p>
+        <div class="card scroll-x mt-16">
+          <table>
+            <thead><tr><th>PO</th><th>Product</th><th>Qty</th><th>Total</th><th>Requested Delivery</th><th>Status</th><th></th></tr></thead>
+            <tbody id="supplier-po-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section data-panel="products" class="hidden">
+        <div class="section-title">Products You Supply</div>
+        <p class="section-sub">Your current offers to SME Anchor.</p>
+        <div class="card scroll-x mt-16">
+          <table>
+            <thead><tr><th>Product</th><th>Your Price</th><th>Delivery</th><th>Available Qty</th></tr></thead>
+            <tbody id="supplier-products-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section data-panel="profile" class="hidden">
+        <div class="section-title">Business Profile</div>
+        <div class="card mt-16" style="padding:18px;max-width:420px;" id="supplier-profile-card"></div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/supplier.js"></script>
+</body>
+</html>
